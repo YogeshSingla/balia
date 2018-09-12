@@ -36,6 +36,7 @@ X = unroll(img)
 #reduce X size
 X = X[0::64]
 print(len(X))
+
 #TESTING SET
 X_test = []
 Y_test = [] #actual label of test images
