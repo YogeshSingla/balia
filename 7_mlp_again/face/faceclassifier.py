@@ -8,8 +8,8 @@ Created on Wed Sep 12 10:32:49 2018
 import matplotlib.image as mpimg
 path = 'TrainDatabase/'
 ext = '.jpg'
-uri #= path + str(1) + ext
-img #= mpimg.imread(uri)
+uri = path + str(1) + ext
+img = mpimg.imread(uri)
 import matplotlib.pyplot as plt
 #plt.imshow(img)
 #plt.show()
@@ -34,7 +34,7 @@ for i in range(1,21):
     uri = path + str(i) + ext
     img = mpimg.imread(uri)
     X.append(unroll(img))
-    Y.append((i+1)/2)
+    Y.append(int((i+1)/2))
 
 #TESTING SET
 X_test = []
