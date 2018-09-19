@@ -24,7 +24,6 @@ Assignment 5:
                 outputY.append(0)
 """
 import matplotlib.image as mpimg
-import matplotlib.pyplot as plt
 from sklearn.neural_network import MLPClassifier
 from skimage.transform import rescale
 
@@ -32,8 +31,7 @@ def unroll(X):
     image_unrolled = []
     for row in X:
         row_unrolled = []
-        for pixel in row:
-            
+        for pixel in row:            
             pixel_unrolled = [sum([x for x in pixel[0:3]])/3] # since it's black and white image
             row_unrolled = row_unrolled + pixel_unrolled
         image_unrolled = image_unrolled + row_unrolled
@@ -68,7 +66,6 @@ Y_train = Y
 #sanity check
 import numpy as np
 train_image_output = np.reshape(Y,(64,64))
-#print(train_image_output)
 mpimg.imsave("river/train_output_image.png",train_image_output,cmap='gray')
 
 #TESTING SET
@@ -82,11 +79,11 @@ img = mpimg.imread(uri)
 X_test_tmp = unroll(img)
 for i in X_test_tmp:
     X_test.append([i])
-#print(len(X_test))
-#print(len(Y))
 
-
-clf = MLPClassifier(alpha=0.001,solver='lbfgs',activation='logistic',learning_rate='constant', hidden_layer_sizes=(5,5),max_iter=1000)
+#MACHINE LEARNING MODEL
+clf = MLPClassifier(alpha=0.001,solver='lbfgs',activation='relu',\
+                    learning_rate='constant', hidden_layer_sizes=(5,5),\
+                    max_iter=1000)
 clf.fit(X_train, Y_train) 
 Y_predicted_probability = clf.predict_proba(X_test)
 print((Y_predicted_probability))
@@ -99,14 +96,4 @@ test_image_output = np.reshape(Y_test,(64,64))
 print(Y_test)
 mpimg.imsave("river/test_image_output.png",test_image_output,cmap='gray')
 
-#HUMAN TESTING
-# Change i value to change input and see output.
-#input_image_uri = test_path + str(i) + ext
-#plt.subplot(121)
-#plt.imshow(mpimg.imread(input_image_uri))
-#plt.title('Input Image')
-#plt.subplot(122)
-#input_image_class = clf.predict([unroll(mpimg.imread(input_image_uri))])
-#plt.imshow(mpimg.imread(path + str(input_image_class[0]) + ext))
-#plt.title('Output Image')
-#plt.show()
+

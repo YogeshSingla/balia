@@ -3,30 +3,31 @@
 Created on Wed Sep 12 10:32:49 2018
 
 @author: kirito
-"""
 
+Tips:
+    Use tab to autocomplete.
+
+Tested in Spyder (Python 2.7)
+"""
 import matplotlib.image as mpimg
+from sklearn.neural_network import MLPClassifier
+
 path = 'TrainDatabase/'
 ext = '.jpg'
 uri = path + str(1) + ext
 img = mpimg.imread(uri)
 import matplotlib.pyplot as plt
-#plt.imshow(img)
-#plt.show()
-
-#print(len(img))
 
 def unroll(X):
     image_unrolled = []
     for row in X:
         row_unrolled = []
         for pixel in row:
-            pixel_unrolled = [x for x in pixel]
+            pixel_unrolled = [sum([x for x in pixel])/ (3.0*255)]
             row_unrolled = row_unrolled + pixel_unrolled
         image_unrolled = image_unrolled + row_unrolled
     return image_unrolled
 
-from sklearn.neural_network import MLPClassifier
 #TRAINING SET
 X = []
 Y = []
@@ -46,10 +47,12 @@ for i in range(1,11):
     X_test.append(unroll(img))
     Y_test.append(i)
 
-clf = MLPClassifier(batch_size=1,max_iter=10000,solver='lbfgs',activation='relu',learning_rate='constant', hidden_layer_sizes=(5,5))
+print(len(X[0]))
+#print(X)
+clf = MLPClassifier(batch_size=1,max_iter=1000,solver='lbfgs',activation='relu',learning_rate='constant', hidden_layer_sizes=(5,5,5,5))
 clf.fit(X, Y) 
 Y_predicted = clf.predict(X_test)
-print(clf.predict_proba(X_test))
+#print(clf.predict_proba(X_test))
 
 correct_predictions = 0
 total = len(Y_test)
@@ -58,10 +61,12 @@ for predicted,actual in zip(Y_predicted,Y_test):
     if predicted == actual :
         correct_predictions = correct_predictions + 1
     
+print("\nAutomated testing")
 print("Accuracy : %.4f " %(float(correct_predictions)/total))
 
 #HUMAN TESTING
 # Change i value to change input and see output.
+print("\nManual Testing (looped)")
 for i in range(1,11):
     input_image_uri = test_path + str(i) + ext
     plt.subplot(121)
