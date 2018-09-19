@@ -15,6 +15,10 @@ This is the repository of the codes written/referred during the **Artificial Int
 <filename>.<ext> # code written by me
 ```
 ## Contributors
-* Pranith
-* Dattatreya
-* Arghya
+
+```
+Pranith     
+Arghya    
+Dattatreya    
+```
+
