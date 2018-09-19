@@ -46,7 +46,7 @@ for i in range(1,11):
     X_test.append(unroll(img))
     Y_test.append(i)
 
-clf = MLPClassifier(batch_size=1,solver='lbfgs',activation='logistic',learning_rate='constant', hidden_layer_sizes=(5,5))
+clf = MLPClassifier(batch_size=1,max_iter=10000,solver='lbfgs',activation='relu',learning_rate='constant', hidden_layer_sizes=(5,5))
 clf.fit(X, Y) 
 Y_predicted = clf.predict(X_test)
 print(clf.predict_proba(X_test))
