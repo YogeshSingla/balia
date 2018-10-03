@@ -14,11 +14,5 @@ This is the repository of the codes written/referred during the **Artificial Int
 <filename>_<contributor_initials>.<ext>  # for code used for reference requested from classmates
 <filename>.<ext> # code written by me
 ```
-## Contributors
 
-```
-Pranith     
-Arghya    
-Dattatreya    
-```
 
