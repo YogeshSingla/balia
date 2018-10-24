@@ -11,8 +11,8 @@ import matplotlib.pyplot as plt
 from mlxtend.plotting import plot_decision_regions
 
 #linearly separable data
-X_n = [[1,0],[0,1],[-1,0],[0,-1]]
-X_p = [[3,2],[6,2],[3,-2],[6,-2]]
+#X_n = [[1,0],[0,1],[-1,0],[0,-1]]
+#X_p = [[3,2],[6,2],[3,-2],[6,-2]]
 
 #non-linear data
 X_n = [[2,2],[2,-2],[-2,2],[-2,-2]]
@@ -20,12 +20,13 @@ X_p = [[-1,0],[0,-1],[0,1],[1,0]]
 
 colors = [0, 0, 0, 0,1,1,1,1]
 X_all = X_n + X_p
-X_all_nl = X_n_nl + X_p_nl
 y = [0,0,0,0,1,1,1,1]
 x1 = [x[0] for x in X_all]
 x2 = [x[1] for x in X_all]
-x1_nl = [x[0] for x in X_all_nl]
-x2_nl = [x[1] for x in X_all_nl]
+
+#and test
+#X_all = [[0,0],[0,1],[1,0],[1,1],[1,1],[1,1]]
+#y = [0,0,0,1,1,1]
 
 plt.xlabel('x1')
 plt.ylabel('x2')
@@ -33,15 +34,6 @@ plt.scatter(x1,x2,c=colors)
 plt.legend()
 plt.title("Dataset Linearly Separable")
 plt.show()
-
-
-plt.xlabel('x1')
-plt.ylabel('x2')
-plt.scatter(x1_nl,x2_nl,c=colors)
-plt.legend()
-plt.title("Dataset Non-Linearly Separable")
-plt.show()
-
 
 from sklearn import svm
 clf = svm.SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
@@ -51,7 +43,7 @@ clf = svm.SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
 clf.fit(X_all,y)
 
 print(clf.predict([[0.,0.]]))
-
+    
 plot_decision_regions(X=np.asarray(X_all), 
                       y=np.asarray(y),
                       clf=clf, 
